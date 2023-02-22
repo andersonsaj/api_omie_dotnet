@@ -1,6 +1,7 @@
 ﻿using IntegracaoOmie.Models;
 using IntegracaoOmie.Models.Cliente;
 using IntegracaoOmie.Rest.Interface;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
 using System.Dynamic;
@@ -11,14 +12,14 @@ namespace IntegracaoOmie.Rest;
 public class ClienteRest : IClienteRest
 {
     private readonly string _url = "https://app.omie.com.br/api/v1/geral/clientes/";
-    public async Task<ResponseGenerico<List<ClientesCadastroResumido>>> ListarClientesResumido(RequestListarClientes parametros)
+    public async Task<ResponseGenerico<List<ClienteCadastroResumido>>> ListarClientesResumido(RequestListarClientes parametros)
     {
-        var response = new ResponseGenerico<List<ClientesCadastroResumido>>();
+        var response = new ResponseGenerico<List<ClienteCadastroResumido>>();
         var respContent = new RestResponse();
         try
         {
             var request = new RestRequest();
-            request.AddBody(parametros);
+            request.AddBody(JsonConvert.SerializeObject(parametros));
             request.AddHeader("Content-Type", "application/json");
 
             using (var cliente = new RestClient(_url))
@@ -37,7 +38,7 @@ public class ClienteRest : IClienteRest
                     {
                         pagina++;
 
-                        parametros.param[0].pagina = pagina;
+                        parametros.Params[0].pagina = pagina;
                         request.AddBody(parametros);
 
                         try
@@ -68,14 +69,14 @@ public class ClienteRest : IClienteRest
         return response;
     }
 
-    public async Task<ResponseGenerico<List<ClientesCadastro>>> ListarClientes(RequestListarClientes parametros)
+    public async Task<ResponseGenerico<List<ClienteCadastroCompleto>>> ListarClientes(RequestListarClientes parametros)
     {
-        var response = new ResponseGenerico<List<ClientesCadastro>>();
+        var response = new ResponseGenerico<List<ClienteCadastroCompleto>>();
         var respContent = new RestResponse();
         try
         {
             var request = new RestRequest();
-            request.AddBody(parametros);
+            request.AddBody(JsonConvert.SerializeObject(parametros));
             request.AddHeader("Content-Type", "application/json");
 
             using (var cliente = new RestClient(_url))
@@ -94,7 +95,7 @@ public class ClienteRest : IClienteRest
                     {
                         pagina++;
 
-                        parametros.param[0].pagina = pagina;
+                        parametros.Params[0].pagina = pagina;
                         request.AddBody(parametros);
 
                         try
@@ -115,6 +116,78 @@ public class ClienteRest : IClienteRest
                     response.CodigoHttp = respContent.StatusCode;
                     response.ErroRetorno = JsonConvert.DeserializeObject<ExpandoObject>(respContent.Content);
                 }
+            }
+        }
+        catch (Exception e)
+        {
+            response.CodigoHttp = HttpStatusCode.InternalServerError;
+        }
+
+        return response;
+    }
+
+    public async Task<ResponseGenerico<ResponseClienteCadastro>> IncluirCliente(RequestCadastrarCliente parametros)
+    {
+        var respContent = new RestResponse();
+        var response = new ResponseGenerico<ResponseClienteCadastro>();
+
+        var request = new RestRequest();
+        request.AddBody(JsonConvert.SerializeObject(parametros));
+        request.AddHeader("Content-Type", "application/json");
+        try
+        {
+            using (var cliente = new RestClient(_url))
+            {
+                respContent = await cliente.PostAsync(request);
+
+                if (respContent.IsSuccessStatusCode)
+                {
+                    var objResponse = JsonConvert.DeserializeObject<ResponseClienteCadastro>(respContent.Content);
+
+                    response.CodigoHttp = respContent.StatusCode;
+                    response.DadosRetorno = objResponse;
+                }
+                else
+                {
+                    response.CodigoHttp = respContent.StatusCode;
+                    response.ErroRetorno = JsonConvert.DeserializeObject<ExpandoObject>(respContent.Content);
+                }
+
+            }
+        }
+        catch (Exception e)
+        {
+            response.CodigoHttp = HttpStatusCode.InternalServerError;
+        }
+
+        return response;        
+    }
+
+    public async Task<ResponseGenerico<string>> IncluirClientesPorLote(RequestCadastrarClienteLote parametros)
+    {
+        var respContent = new RestResponse();
+        var response = new ResponseGenerico<string>();
+        var json = JsonConvert.SerializeObject(parametros);
+        var request = new RestRequest();
+        request.AddBody(JsonConvert.SerializeObject(parametros));
+        request.AddHeader("Content-Type", "application/json");
+        try
+        {
+            using (var cliente = new RestClient(_url))
+            {
+                respContent = await cliente.PostAsync(request);
+
+                if (respContent.IsSuccessStatusCode)
+                {
+                    response.CodigoHttp = respContent.StatusCode;
+                    response.DadosRetorno = "Sucesso";
+                }
+                else
+                {
+                    response.CodigoHttp = respContent.StatusCode;
+                    response.ErroRetorno = JsonConvert.DeserializeObject<ExpandoObject>(respContent.Content);
+                }
+
             }
         }
         catch (Exception e)

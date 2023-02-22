@@ -5,129 +5,129 @@ namespace IntegracaoOmie.Models.Cliente
     public class ResponseListarClientes : Paginacao
     {
         [JsonProperty("clientes_cadastro")]
-        public List<ClientesCadastro> ClientesCadastro;
+        public List<ClienteCadastroCompleto> ClientesCadastro { get; set; }
     }
-    public class ClientesCadastro
+    public class ClienteCadastroCompleto
     {
         [JsonProperty("bairro")]
-        public string Bairro;
+        public string Bairro { get; set; }
 
         [JsonProperty("bloquear_faturamento")]
-        public string BloquearFaturamento;
+        public string BloquearFaturamento { get; set; }
 
         [JsonProperty("cep")]
-        public string Cep;
+        public string Cep { get; set; }
 
         [JsonProperty("cidade")]
-        public string Cidade;
+        public string Cidade { get; set; }
 
         [JsonProperty("cidade_ibge")]
-        public string CidadeIbge;
+        public string CidadeIbge { get; set; }
 
         [JsonProperty("cnpj_cpf")]
-        public string CnpjCpf;
+        public string CnpjCpf { get; set; }
 
         [JsonProperty("codigo_cliente_integracao")]
-        public string CodigoClienteIntegracao;
+        public string CodigoClienteIntegracao { get; set; }
 
         [JsonProperty("codigo_cliente_omie")]
-        public int CodigoClienteOmie;
+        public int CodigoClienteOmie { get; set; }
 
         [JsonProperty("codigo_pais")]
-        public string CodigoPais;
+        public string CodigoPais { get; set; }
 
         [JsonProperty("complemento")]
-        public string Complemento;
+        public string Complemento { get; set; }
 
         [JsonProperty("dadosBancarios")]
-        public DadosBancarios DadosBancarios;
+        public DadosBancarios DadosBancarios { get; set; }
 
         [JsonProperty("email")]
-        public string Email;
+        public string Email { get; set; }
 
         [JsonProperty("endereco")]
-        public string Endereco;
+        public string Endereco { get; set; }
 
         [JsonProperty("enderecoEntrega")]
-        public EnderecoEntrega EnderecoEntrega;
+        public EnderecoEntrega EnderecoEntrega { get; set; }
 
         [JsonProperty("endereco_numero")]
-        public string EnderecoNumero;
+        public string EnderecoNumero { get; set; }
 
         [JsonProperty("estado")]
-        public string Estado;
+        public string Estado { get; set; }
 
         [JsonProperty("exterior")]
-        public string Exterior;
+        public string Exterior { get; set; }
 
         [JsonProperty("inativo")]
-        public string Inativo;
+        public string Inativo { get; set; }
 
         [JsonProperty("info")]
-        public Info Info;
+        public Info Info { get; set; }
 
         [JsonProperty("inscricao_estadual")]
-        public string InscricaoEstadual;
+        public string InscricaoEstadual { get; set; }
 
         [JsonProperty("inscricao_municipal")]
-        public string InscricaoMunicipal;
+        public string InscricaoMunicipal { get; set; }
 
         [JsonProperty("nome_fantasia")]
-        public string NomeFantasia;
+        public string NomeFantasia { get; set; }
 
         [JsonProperty("optante_simples_nacional")]
-        public string OptanteSimplesNacional;
+        public string OptanteSimplesNacional { get; set; }
 
         [JsonProperty("pessoa_fisica")]
-        public string PessoaFisica;
+        public string PessoaFisica { get; set; }
 
         [JsonProperty("produtor_rural")]
-        public string ProdutorRural;
+        public string ProdutorRural { get; set; }
 
         [JsonProperty("razao_social")]
-        public string RazaoSocial;
+        public string RazaoSocial { get; set; }
 
         [JsonProperty("recomendacoes")]
-        public Recomendacoes Recomendacoes;
+        public Recomendacoes Recomendacoes { get; set; }
 
         [JsonProperty("tags")]
-        public List<Tag> Tags;
+        public List<Tag> Tags { get; set; }
 
         [JsonProperty("telefone1_ddd")]
-        public string Telefone1Ddd;
+        public string Telefone1Ddd { get; set; }
 
         [JsonProperty("telefone1_numero")]
-        public string Telefone1Numero;
+        public string Telefone1Numero { get; set; }
 
         [JsonProperty("telefone2_ddd")]
-        public string Telefone2Ddd;
+        public string Telefone2Ddd { get; set; }
 
         [JsonProperty("telefone2_numero")]
-        public string Telefone2Numero;
+        public string Telefone2Numero { get; set; }
 
         [JsonProperty("valor_limite_credito")]
-        public int ValorLimiteCredito;
+        public int ValorLimiteCredito { get; set; }
     }
 
     public class DadosBancarios
     {
         [JsonProperty("agencia")]
-        public string Agencia;
+        public string Agencia { get; set; }
 
         [JsonProperty("codigo_banco")]
-        public string CodigoBanco;
+        public string CodigoBanco { get; set; }
 
         [JsonProperty("conta_corrente")]
-        public string ContaCorrente;
+        public string ContaCorrente { get; set; }
 
         [JsonProperty("doc_titular")]
-        public string DocTitular;
+        public string DocTitular { get; set; }
 
         [JsonProperty("nome_titular")]
-        public string NomeTitular;
+        public string NomeTitular { get; set; }
 
         [JsonProperty("transf_padrao")]
-        public string TransfPadrao;
+        public string TransfPadrao { get; set; }
     }
 
     public class EnderecoEntrega
@@ -137,39 +137,39 @@ namespace IntegracaoOmie.Models.Cliente
     public class Info
     {
         [JsonProperty("cImpAPI")]
-        public string CImpAPI;
+        public string CImpAPI { get; set; }
 
         [JsonProperty("dAlt")]
-        public string DAlt;
+        public string DAlt { get; set; }
 
         [JsonProperty("dInc")]
-        public string DInc;
+        public string DInc { get; set; }
 
         [JsonProperty("hAlt")]
-        public string HAlt;
+        public string HAlt { get; set; }
 
         [JsonProperty("hInc")]
-        public string HInc;
+        public string HInc { get; set; }
 
         [JsonProperty("uAlt")]
-        public string UAlt;
+        public string UAlt { get; set; }
 
         [JsonProperty("uInc")]
-        public string UInc;
+        public string UInc { get; set; }
     }
 
     public class Recomendacoes
     {
         [JsonProperty("codigo_transportadora")]
-        public int CodigoTransportadora;
+        public int CodigoTransportadora { get; set; }
 
         [JsonProperty("gerar_boletos")]
-        public string GerarBoletos;
+        public string GerarBoletos { get; set; }
     }
     public class Tag
     {
         [JsonProperty("tag")]
-        public string tag;
+        public string tag { get; set; }
     }
 
 

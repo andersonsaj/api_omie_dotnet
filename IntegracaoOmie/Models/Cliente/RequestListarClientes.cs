@@ -1,10 +1,12 @@
 ﻿
+using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 
 namespace IntegracaoOmie.Models.Cliente;
 
 public class RequestListarClientes : RequestBase
 {
-    public List<Param> param { get; set; } = new List<Param>();
+    [JsonProperty("param")]
+    public List<Param> Params { get; set; } = new List<Param>();
 }
 

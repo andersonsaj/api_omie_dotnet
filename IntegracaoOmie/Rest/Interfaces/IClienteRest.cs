@@ -6,7 +6,12 @@ namespace IntegracaoOmie.Rest.Interface
 {
     public interface IClienteRest
     {
-        Task<ResponseGenerico<List<ClientesCadastro>>> ListarClientes([FromBody] RequestListarClientes parametros);
-        Task<ResponseGenerico<List<ClientesCadastroResumido>>> ListarClientesResumido([FromBody] RequestListarClientes parametros);
+        Task<ResponseGenerico<List<ClienteCadastroCompleto>>> ListarClientes(RequestListarClientes parametros);
+
+        Task<ResponseGenerico<List<ClienteCadastroResumido>>> ListarClientesResumido(RequestListarClientes parametros);
+
+        Task<ResponseGenerico<ResponseClienteCadastro>> IncluirCliente(RequestCadastrarCliente parametros);
+
+        Task<ResponseGenerico<string>> IncluirClientesPorLote(RequestCadastrarClienteLote parametros);
     }
 }
