@@ -1,8 +1,4 @@
 using IntegracaoOmie;
-using IntegracaoOmie.Rest;
-using IntegracaoOmie.Rest.Interface;
-using IntegracaoOmie.Services;
-using IntegracaoOmie.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +9,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IClienteServices, ClienteServices>();
-builder.Services.AddScoped<IClienteRest, ClienteRest>();
 builder.Services.AddApplication(builder.Configuration);
 
 //builder.Services.AddScoped(provider => new AutoMapper.MapperConfiguration(config =>

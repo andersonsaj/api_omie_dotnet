@@ -1,11 +1,8 @@
-﻿using FluentValidation;
-using IntegracaoOmie.Models;
+﻿using IntegracaoOmie.Models;
 using IntegracaoOmie.Models.Cliente;
 using IntegracaoOmie.Rest.Interface;
 using IntegracaoOmie.Services.Interfaces;
 using IntegracaoOmie.Validator.Cliente;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using System.Dynamic;
 
 namespace IntegracaoOmie.Services
@@ -87,7 +84,7 @@ namespace IntegracaoOmie.Services
 
         public async Task<ResponseGenerico<List<ClienteCadastroCompleto>>> ListarClientes()
         {
-            var listClientes = new RequestListarClientes
+            var listClientes = new RequestListar
             {
                 call = "ListarClientes",
                 app_key = _requestBase.app_key,
@@ -102,7 +99,7 @@ namespace IntegracaoOmie.Services
 
         public async Task<ResponseGenerico<List<ClienteCadastroResumido>>> ListarClientesResumido()
         {
-            var listClientes = new RequestListarClientes
+            var listClientes = new RequestListar
             {
                 call = "ListarClientesResumido",
                 app_key = _requestBase.app_key,

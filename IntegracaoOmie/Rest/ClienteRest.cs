@@ -12,7 +12,7 @@ namespace IntegracaoOmie.Rest;
 public class ClienteRest : IClienteRest
 {
     private readonly string _url = "https://app.omie.com.br/api/v1/geral/clientes/";
-    public async Task<ResponseGenerico<List<ClienteCadastroResumido>>> ListarClientesResumido(RequestListarClientes parametros)
+    public async Task<ResponseGenerico<List<ClienteCadastroResumido>>> ListarClientesResumido(RequestListar parametros)
     {
         var response = new ResponseGenerico<List<ClienteCadastroResumido>>();
         var respContent = new RestResponse();
@@ -69,7 +69,7 @@ public class ClienteRest : IClienteRest
         return response;
     }
 
-    public async Task<ResponseGenerico<List<ClienteCadastroCompleto>>> ListarClientes(RequestListarClientes parametros)
+    public async Task<ResponseGenerico<List<ClienteCadastroCompleto>>> ListarClientes(RequestListar parametros)
     {
         var response = new ResponseGenerico<List<ClienteCadastroCompleto>>();
         var respContent = new RestResponse();
@@ -136,23 +136,21 @@ public class ClienteRest : IClienteRest
         request.AddHeader("Content-Type", "application/json");
         try
         {
-            using (var cliente = new RestClient(_url))
+            using var cliente = new RestClient(_url);
+            
+            respContent = await cliente.PostAsync(request);
+
+            if (respContent.IsSuccessStatusCode)
             {
-                respContent = await cliente.PostAsync(request);
+                var objResponse = JsonConvert.DeserializeObject<ResponseClienteCadastro>(respContent.Content);
 
-                if (respContent.IsSuccessStatusCode)
-                {
-                    var objResponse = JsonConvert.DeserializeObject<ResponseClienteCadastro>(respContent.Content);
-
-                    response.CodigoHttp = respContent.StatusCode;
-                    response.DadosRetorno = objResponse;
-                }
-                else
-                {
-                    response.CodigoHttp = respContent.StatusCode;
-                    response.ErroRetorno = JsonConvert.DeserializeObject<ExpandoObject>(respContent.Content);
-                }
-
+                response.CodigoHttp = respContent.StatusCode;
+                response.DadosRetorno = objResponse;
+            }
+            else
+            {
+                response.CodigoHttp = respContent.StatusCode;
+                response.ErroRetorno = JsonConvert.DeserializeObject<ExpandoObject>(respContent.Content);
             }
         }
         catch (Exception e)

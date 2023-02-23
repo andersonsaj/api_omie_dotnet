@@ -2,7 +2,13 @@
 
 namespace IntegracaoOmie.Models;
 
-[JsonObject(MemberSerialization.OptIn)]
+
+public class RequestListar : RequestBase
+{
+    [JsonProperty("param")]
+    public List<Param> Params { get; set; } = new List<Param>();
+}
+
 public class Param
 {
     [JsonProperty]

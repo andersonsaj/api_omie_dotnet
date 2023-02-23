@@ -1,4 +1,9 @@
 ﻿using IntegracaoOmie.Models;
+using IntegracaoOmie.Rest.Interface;
+using IntegracaoOmie.Rest;
+using IntegracaoOmie.Services.Interfaces;
+using IntegracaoOmie.Services;
+using IntegracaoOmie.Rest.Interfaces;
 
 namespace IntegracaoOmie
 {
@@ -7,6 +12,12 @@ namespace IntegracaoOmie
         public static void AddApplication(this IServiceCollection services, IConfiguration config)
         {
             AdicionarCredencias(services, config);
+
+            services.AddScoped<IClienteServices, ClienteServices>();
+            services.AddScoped<IContaCorrenteServices, ContaCorrenteServices>();
+
+            services.AddScoped<IClienteRest, ClienteRest>();
+            services.AddScoped<IContaCorrenteRest, ContaCorrenteRest>();
         }
 
         private static void AdicionarCredencias(IServiceCollection services, IConfiguration config)

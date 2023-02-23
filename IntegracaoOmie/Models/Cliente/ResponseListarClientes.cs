@@ -31,7 +31,7 @@ namespace IntegracaoOmie.Models.Cliente
         public string CodigoClienteIntegracao { get; set; }
 
         [JsonProperty("codigo_cliente_omie")]
-        public int CodigoClienteOmie { get; set; }
+        public long CodigoClienteOmie { get; set; }
 
         [JsonProperty("codigo_pais")]
         public string CodigoPais { get; set; }
@@ -132,6 +132,42 @@ namespace IntegracaoOmie.Models.Cliente
 
     public class EnderecoEntrega
     {
+        [JsonProperty("entRazaoSocial")]
+        public string EntRazaoSocial { get; set; }
+
+        [JsonProperty("entCnpjCpf")]
+        public string EntCnpjCpf { get; set; }
+
+        [JsonProperty("entEndereco")]
+        public string EntEndereco { get; set; }
+
+        [JsonProperty("entNumero")]
+        public string EntNumero { get; set; }
+
+        [JsonProperty("entComplemento")]
+        public string EntComplemento { get; set; }
+
+        [JsonProperty("entBairro")]
+        public string EntBairro { get; set; }
+
+        [JsonProperty("entCEP")]
+        public string EntCEP { get; set; }
+
+        [JsonProperty("entEstado")]
+        public string EntEstado { get; set; }
+
+        [JsonProperty("entCidade")]
+        public string EntCidade { get; set; }
+
+        [JsonProperty("entSepararEndereco")]
+        public string EntSepararEndereco { get; set; }
+
+        [JsonProperty("entTelefone")]
+        public string EntTelefone { get; set; }
+
+        [JsonProperty("entIE")]
+        public string EntIE { get; set; }
+
     }
 
     public class Info
@@ -160,12 +196,25 @@ namespace IntegracaoOmie.Models.Cliente
 
     public class Recomendacoes
     {
+        [JsonProperty("numero_parcelas")]
+        public string NumeroParcelas { get; set; }
+
+        [JsonProperty("codigo_vendedor")]
+        public int CodigoVendedor { get; set; }
+
+        [JsonProperty("email_fatura")]
+        public string EmailFatura { get; set; }
+
         [JsonProperty("codigo_transportadora")]
         public int CodigoTransportadora { get; set; }
 
         [JsonProperty("gerar_boletos")]
         public string GerarBoletos { get; set; }
+
+        [JsonProperty("tipo_assinante")]
+        public string TipoAssinante { get; set; }
     }
+
     public class Tag
     {
         [JsonProperty("tag")]
